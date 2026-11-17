@@ -1,0 +1,56 @@
+name: CI
+
+# Tests the skill scripts against a local mock on every push and pull request (Node 18, 20, 22, 24).
+# On a `v*` tag it also runs one live call against production with a Pro test key (secret
+# TUBETRANSCRIPT_TEST_KEY): one request per release. See RELEASING.md.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  test:
+    name: Tests (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["18", "20", "22", "24"]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: ${{ matrix.node }}
+      - run: node --test tests/*.test.mjs
+      - name: Skill frontmatter and versions agree
+        run: node tests/check-skills.mjs
+
+  live:
+    name: Live check (production)
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+      - name: Fetch one known video
+        env:
+          TUBETRANSCRIPT_API_KEY: ${{ secrets.TUBETRANSCRIPT_TEST_KEY }}
+        run: |
+          node skills/tubetranscript-setup/scripts/setup.mjs --check
+          node skills/youtube-transcript/scripts/transcript.mjs jNQXAC9IVRw --out "$RUNNER_TEMP/t" | tee out.json
+          node -e "const r=JSON.parse(require('fs').readFileSync('out.json','utf8'));if(!r.ok||!r.timestamps||r.segments<1)process.exit(1)"

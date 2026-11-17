@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: newsletter-from-talk
+expected_outcome: |
+  A newsletter of roughly 300-600 words with a subject line under 60 characters and preview text, one section per main point, numbers and examples taken from the talk (38 percent bill cut, 230 ms round trip, the inode ETag bug), opinions attributed to Ana, and a link to the video.
+context:
+  scaffold_script: place-files.sh

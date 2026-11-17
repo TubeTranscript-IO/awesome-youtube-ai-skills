@@ -1,0 +1,12 @@
+{
+  "name": "awesome-youtube-ai-skills",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agent skills for TubeTranscript: YouTube transcripts saved as files for Claude Code, Cursor and other coding agents.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs && node tests/check-skills.mjs"
+  }
+}

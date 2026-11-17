@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: script-with-hooks
+expected_outcome: |
+  A script file of roughly 8 minutes of speech with 5 distinct hook options and a recommendation, a roadmap, sections with open loops, marked pattern interrupts about every 45-60 seconds, timing marks, natural CTAs, topics the competitor covers that the old video missed, in the creator's voice and without copied competitor sentences.
+context:
+  scaffold_script: place-files.sh

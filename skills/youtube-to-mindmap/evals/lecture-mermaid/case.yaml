@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: lecture-mermaid
+expected_outcome: |
+  A Mermaid mindmap (renders in Obsidian) with one root, 4-7 main branches following the talk's order (why, Cache-Control, validation/ETags, invalidation, possibly summary) with start times, short leaves taken from the transcript, and no brackets in labels except the root.
+context:
+  scaffold_script: place-files.sh

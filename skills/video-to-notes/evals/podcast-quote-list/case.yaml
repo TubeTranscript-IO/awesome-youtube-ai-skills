@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: podcast-quote-list
+expected_outcome: |
+  Five quotes copied word for word from the transcript, each with a youtu.be/Pd5mBets07a?t=<seconds> link to the line where it starts, attributed to Priya or Jon only where the text makes the speaker clear, and flagged as unclear otherwise.
+context:
+  scaffold_script: place-files.sh

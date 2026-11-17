@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: summary-with-citations
+expected_outcome: |
+  A short summary (5-8 points) of the caching talk where every point links to the right moment with a youtu.be/Hc4ch1ngT9x?t=<seconds> link whose seconds match the transcript line, with no claims that are not in the transcript.
+context:
+  scaffold_script: place-files.sh

@@ -1,0 +1,69 @@
+{
+ "video_id": "RawTake01ab",
+ "url": "https://www.youtube.com/watch?v=RawTake01ab",
+ "title": "studio setup raw take 1",
+ "language": "en",
+ "job_id": "raw-1",
+ "chunks": [
+  {
+   "start": 0.0,
+   "duration": 3.1,
+   "text": "hey everyone so um today I'm going to show you"
+  },
+  {
+   "start": 3.1,
+   "duration": 2.4,
+   "text": "how I set up my home studio"
+  },
+  {
+   "start": 7.9,
+   "duration": 2.2,
+   "text": "the first thing you need is"
+  },
+  {
+   "start": 10.4,
+   "duration": 3.0,
+   "text": "the first thing you need is a decent microphone"
+  },
+  {
+   "start": 13.4,
+   "duration": 3.6,
+   "text": "uh I use a dynamic mic because my room echoes a lot"
+  },
+  {
+   "start": 17.0,
+   "duration": 2.8,
+   "text": "and dynamic mics pick up less of the room"
+  },
+  {
+   "start": 22.6,
+   "duration": 3.2,
+   "text": "next is lighting um this is the part people skip"
+  },
+  {
+   "start": 25.8,
+   "duration": 3.4,
+   "text": "one big soft light at forty five degrees does most of the work"
+  },
+  {
+   "start": 29.2,
+   "duration": 2.6,
+   "text": "and uh a small light behind you for separation"
+  },
+  {
+   "start": 35.9,
+   "duration": 2.5,
+   "text": "the camera matters less than you think"
+  },
+  {
+   "start": 38.4,
+   "duration": 3.1,
+   "text": "the camera matters less than you think honestly a phone is fine"
+  },
+  {
+   "start": 41.5,
+   "duration": 3.3,
+   "text": "if the light is good, um, that's it for today"
+  }
+ ]
+}

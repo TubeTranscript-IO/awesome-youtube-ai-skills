@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: thumbnail-concepts
+expected_outcome: |
+  Three distinct thumbnail concepts grounded in the video (e.g. the 38 percent bill cut), each with composition, expression, 2-4 words of text and colours, Midjourney prompts with --ar 16:9 that leave text out of the image, and a small-size readability check.
+context:
+  scaffold_script: place-files.sh

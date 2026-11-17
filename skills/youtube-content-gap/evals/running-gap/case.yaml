@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: running-gap
+expected_outcome: |
+  A content gap report that lists topics the competitor covers and the user's video does not (goal setting/5K date, warm-up, strength training, rest days question, breathing, shin splints and the 10 percent rule, nutrition, running buddy/club, call to action), each with a timestamp link into the competitor video, notes what the user's video does that the competitor does not (shoe advice, app tracking, weekly progression), and makes no invented search volume or view numbers.
+context:
+  scaffold_script: place-files.sh

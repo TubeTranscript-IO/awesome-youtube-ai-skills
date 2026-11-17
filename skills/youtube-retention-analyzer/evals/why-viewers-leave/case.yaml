@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: why-viewers-leave
+expected_outcome: |
+  A report that finds the drop in the first 30 seconds, the dip around 3:16 (no-cache vs no-store) and the dip around 6:17-6:22 (the ETag bug story into 'Part four'), and the rewatch spike around 2:23-2:30 (max-age and fingerprinting), quotes what was said at each, gives specific fixes, and does not claim visual causes as facts.
+context:
+  scaffold_script: place-files.sh

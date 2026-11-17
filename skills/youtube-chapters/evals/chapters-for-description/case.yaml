@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: chapters-for-description
+expected_outcome: |
+  A chapter list starting at 0:00 with 4-8 chapters at topic changes taken from transcript line times, every chapter at least 10 seconds, specific searchable titles, checked against YouTube's rules, ready to paste.
+context:
+  scaffold_script: place-files.sh

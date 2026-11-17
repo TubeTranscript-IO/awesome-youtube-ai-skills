@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: podcast-clips
+expected_outcome: |
+  3-7 clip suggestions saved to a file, each with start and end times taken from the transcript lines, a duration of 20 to 60 seconds (longer stories trimmed to a tight span), starting on the guest's line rather than the host's question, a hook quoted exactly from the transcript, and a youtu.be link with the right ?t= seconds. Self-contained moments such as the shoebox story, the price doubling and the 2 a.m. bug story are preferred.
+context:
+  scaffold_script: place-files.sh

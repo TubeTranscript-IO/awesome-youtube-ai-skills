@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: week-of-posts
+expected_outcome: |
+  Five community posts across the week (teaser, poll, quiz, opinion, follow-up) written from the transcript, with 2-4 short options per poll/quiz, the quiz answer taken from the video and named for the creator, and a follow-up with a correct timestamp link.
+context:
+  scaffold_script: place-files.sh

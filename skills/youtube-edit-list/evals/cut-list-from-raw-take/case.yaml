@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: cut-list-from-raw-take
+expected_outcome: |
+  A cut list file with 25 fps timecodes covering the filler words (um, uh), the pauses between captions and the two restarted sentences, with filler and retake rows marked for checking by ear and caption-gap silences flagged as approximate.
+context:
+  scaffold_script: place-files.sh

@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: pitch-a-brand
+expected_outcome: |
+  A media kit using only the given numbers, a rate card that derives CPM from the past deal ($900 / 25k views = $36 CPM) and applies it to 21k average views (about $756) with the formula shown, no invented market CPM figures, a pitch email under 150 words with a subject under 50 characters, an ad read in the creator's voice with a disclosure reminder.
+context:
+  scaffold_script: place-files.sh
