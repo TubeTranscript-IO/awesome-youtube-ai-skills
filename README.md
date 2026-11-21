@@ -3,7 +3,7 @@
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![Powered by TubeTranscript.io](https://img.shields.io/badge/Powered%20by-TubeTranscript.io-e11d48)](https://tubetranscript.io/?utm_source=github&utm_medium=awesome-youtube-ai-skills)
 
-> An awesome collection of MCP servers and AI Agent skills (Claude Code, Cursor) to extract, summarize, and bypass blocked YouTube transcripts using Whisper API.
+> An awesome collection of MCP servers and AI Agent skills (Claude Code, Cursor) to fetch, summarize and repurpose YouTube transcripts, with Whisper transcription for videos that have no captions.
 
 15 agent skills and 2 MCP servers that let coding agents read YouTube videos: fetch the transcript (even when a
 video has no captions), save it with timestamps, and turn it into notes, subtitles, clips, chapters, scripts or a
@@ -34,9 +34,9 @@ npx skills add TubeTranscript-IO/awesome-youtube-ai-skills
 recognition: the audio is transcribed with Whisper on TubeTranscript's servers and returned through the same API
 call (the `whisper-api` fallback). Your agent waits for the job and gets a timestamped transcript.
 
-**Works from servers YouTube blocks.** The same libraries raise `RequestBlocked` / `IpBlocked` on AWS, GCP, Azure,
-Vercel and most VPS providers, because YouTube blocks cloud IP ranges. The API makes the request for you, so your
-agent can bypass blocked YouTube subtitles from CI runners and cloud sandboxes. Python user? The
+**Works from CI runners and cloud sandboxes.** The same libraries often raise `RequestBlocked` / `IpBlocked` on AWS,
+GCP, Azure, Vercel and most VPS providers. Your agent calls the TubeTranscript API instead, so it gets the same
+transcript from CI runners and cloud sandboxes. Python user? The
 [`tubetranscript`](https://pypi.org/project/tubetranscript/) package is a drop-in replacement for
 `youtube-transcript-api` that falls back to the API only when YouTube blocks the direct request.
 
@@ -76,26 +76,43 @@ and `io.tubetranscript/ai-tools`. Use them when your agent cannot run scripts, o
 | `io.tubetranscript/transcripts` | `https://tubetranscript.io/api/mcp` | `get_transcript` (YouTube URL or ID), `transcribe_url` (YouTube, TikTok, Instagram, Facebook) |
 | `io.tubetranscript/ai-tools` | `https://tubetranscript.io/api/mcp/tools` | `extract_hooks`, `create_mindmap`, `generate_brand_voice_blog` and creator tools, by `job_id` |
 
-Claude Code:
+**Free: connect with a sign-in (OAuth).** No key to copy: the first time, your agent opens TubeTranscript in the
+browser, where you sign in (or create a free account, verify your email) and click Allow. You get `get_transcript` and
+`transcribe_url` with 15 transcripts per 24 hours, 3 of them transcribed from audio. `/api/mcp` serves every tool;
+the AI tools need Pro.
+
+Claude Code (then run `/mcp` in a new session and choose Authenticate):
+
+```bash
+claude mcp add --transport http tubetranscript https://tubetranscript.io/api/mcp
+```
+
+Cursor (`~/.cursor/mcp.json`, then click Connect in the MCP settings):
+
+```json
+{ "mcpServers": { "tubetranscript": { "url": "https://tubetranscript.io/api/mcp" } } }
+```
+
+VS Code (`.vscode/mcp.json`, then Start the server and sign in):
+
+```json
+{ "servers": { "tubetranscript": { "type": "http", "url": "https://tubetranscript.io/api/mcp" } } }
+```
+
+Claude (claude.ai, desktop): Settings > Connectors > Add custom connector, URL `https://tubetranscript.io/api/mcp`.
+
+**Pro: an API key in a header**, for clients without OAuth (Windsurf, n8n) or to use the Pro tools from scripts:
 
 ```bash
 claude mcp add --transport http tubetranscript https://tubetranscript.io/api/mcp \
   --header "Authorization: Bearer $TUBETRANSCRIPT_API_KEY"
-claude mcp add --transport http tubetranscript-ai https://tubetranscript.io/api/mcp/tools \
-  --header "Authorization: Bearer $TUBETRANSCRIPT_API_KEY"
 ```
-
-Cursor (`.cursor/mcp.json`) and other clients that take a URL and headers:
 
 ```json
 {
   "mcpServers": {
     "tubetranscript": {
       "url": "https://tubetranscript.io/api/mcp",
-      "headers": { "Authorization": "Bearer tt_live_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" }
-    },
-    "tubetranscript-ai": {
-      "url": "https://tubetranscript.io/api/mcp/tools",
       "headers": { "Authorization": "Bearer tt_live_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" }
     }
   }
@@ -131,8 +148,9 @@ Ask: *"Get me an SRT of this video for Premiere."*
 
 ### tubetranscript-setup
 
-Checks or saves your TubeTranscript API key (`--check`, `--save` with hidden input, `--from-env`) and verifies it
-without spending a request. The other skills use it when no key is configured.
+Connects TubeTranscript to your agent: the free MCP connection with a sign-in (Claude Code, Cursor, VS Code,
+Claude), or a Pro API key for the scripts (`--check`, `--save` with hidden input, `--from-env`, checked without
+spending a request). The other skills use it when nothing is set up yet.
 
 ```bash
 npx skills add TubeTranscript-IO/awesome-youtube-ai-skills --skill tubetranscript-setup
@@ -281,44 +299,45 @@ Ask: *"Help me pitch an app-monitoring sponsor: 48k subs, 21k average views."*
 
 ## 🚀 Quick Start & API Key
 
-1. **Get an API key** at [tubetranscript.io](https://tubetranscript.io/dashboard/api?utm_source=github&utm_medium=awesome-youtube-ai-skills)
-   (sign in, then Dashboard > API). API access is part of the
-   [Pro plan](https://tubetranscript.io/pricing?utm_source=github&utm_medium=awesome-youtube-ai-skills). Keys look like `tt_live_…`.
-2. **Install the skills** in your project:
+1. **Install the skills** in your project:
 
    ```bash
    npx skills add TubeTranscript-IO/awesome-youtube-ai-skills
    ```
 
-3. **Set the key** in a `.env` file at the root of the project your agent works in:
+2. **Connect TubeTranscript**, one of:
+   - **Free:** connect the MCP server with a sign-in (see [MCP servers](#mcp-servers)), for example in Claude Code
+     `claude mcp add --transport http tubetranscript https://tubetranscript.io/api/mcp`. The skills then save
+     transcripts from the `get_transcript` tool. You get plain text, without timestamps.
+   - **Pro:** an API key for the scripts, which add timestamps, SRT/VTT, chapters and clip lists. Create it at
+     [tubetranscript.io](https://tubetranscript.io/dashboard/api?utm_source=github&utm_medium=awesome-youtube-ai-skills)
+     (Dashboard > API, part of the
+     [Pro plan](https://tubetranscript.io/pricing?utm_source=github&utm_medium=awesome-youtube-ai-skills); keys look
+     like `tt_live_…`) and set it in a `.env` file at the root of the project your agent works in:
 
-   ```bash
-   # .env
-   TUBETRANSCRIPT_API_KEY=tt_live_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-   ```
+     ```bash
+     # .env
+     TUBETRANSCRIPT_API_KEY=tt_live_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+     ```
 
-   Keep it out of git:
+     Keep it out of git with `echo ".env" >> .gitignore`. The scripts read the key from the
+     `TUBETRANSCRIPT_API_KEY` environment variable first, then from `./.env`, then from
+     `~/.config/tubetranscript/credentials`. To set it once for every project, run the setup script in your own
+     terminal (input is hidden and never shown to the agent):
 
-   ```bash
-   echo ".env" >> .gitignore
-   ```
+     ```bash
+     node .claude/skills/tubetranscript-setup/scripts/setup.mjs --save
+     ```
 
-   The scripts read the key from the `TUBETRANSCRIPT_API_KEY` environment variable first, then from `./.env`, then
-   from `~/.config/tubetranscript/credentials`. To set it once for every project instead, run the setup script in
-   your own terminal (input is hidden and never shown to the agent):
-
-   ```bash
-   node .claude/skills/tubetranscript-setup/scripts/setup.mjs --save
-   ```
-
-   The path depends on your agent and on whether you installed with `-g`.
-4. **Ask your agent** about a video: *"Summarize https://www.youtube.com/watch?v=jNQXAC9IVRw with timestamps."*
+     The path depends on your agent and on whether you installed with `-g`.
+3. **Ask your agent** about a video: *"Summarize https://www.youtube.com/watch?v=jNQXAC9IVRw."*
 
 The scripts need Node 18+ (you already have it if `npx` works) and have no dependencies. `youtube-edit-list` uses
 [ffmpeg](https://ffmpeg.org) for silences in media files.
 
 | Plan | Price | Transcripts per 24 h (per team) | Of which from audio (Whisper) |
 |---|---|---|---|
+| Free (MCP sign-in, verified email) | $0 | 15 | 3 |
 | Pro | $4.99/month | 100 | 30 |
 | Enterprise | $19/month | 1,000 | 100 |
 
@@ -338,7 +357,7 @@ falls back to it only when YouTube blocks you.
 
 **Do these skills work in Cursor, Codex and other agents, not only Claude Code?**
 Yes. They are plain `SKILL.md` files installed by the skills CLI for the agent you choose (`-a`). Agents that use
-MCP instead can connect to the two MCP servers above.
+MCP instead can connect to the MCP server above, free with a sign-in.
 
 **Does the agent see my API key?**
 The scripts never print it (only its last 4 characters), and `setup.mjs --save` takes it as hidden input in your own

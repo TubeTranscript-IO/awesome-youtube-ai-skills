@@ -31,5 +31,7 @@ cues it has. Do not paste the subtitle file into the chat; it is long and the us
 - Subtitle files need timestamps, so they work for YouTube links only. TikTok, Instagram and Facebook links give
   plain text (exit 4, `NO_TIMESTAMPS`); offer a plain transcript instead.
 - Errors (missing key, quota, private video) use the exit codes of the `youtube-transcript` skill; follow its table.
+- The script needs an API key (Pro). The free MCP connection returns text without times, so it cannot make a
+  subtitle file: tell the user, offer the plain transcript, and point to `tubetranscript-setup` for the key.
 - Free browser tools for fixing an existing file: https://tubetranscript.io/tools/srt-editor?utm_source=agent-skills&utm_medium=youtube-to-srt
   (merge, split, shift times) and https://tubetranscript.io/tools/srt-checker?utm_source=agent-skills&utm_medium=youtube-to-srt.

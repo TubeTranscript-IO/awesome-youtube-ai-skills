@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: no-key-no-mcp
+expected_outcome: |
+  With no API key and no TubeTranscript MCP tools, the agent tries the script, sees it has no key, does not invent what the video says, and offers the free connection (claude mcp add --transport http tubetranscript https://tubetranscript.io/api/mcp with a browser sign-in) as the way forward, without asking for a key in the chat.

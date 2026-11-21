@@ -42,6 +42,6 @@ spends one request, or none when the video is already cached for that team.
 
 - The scripts follow the public contract of `GET /api/mcp/transcript` (`?chunks=1`: `chunks`, `language`,
   `video_title`) and the MCP `transcribe_url` / `tools/list` methods. Server changes to them must be additive.
-- The `X-TubeTranscript-Client` value must keep matching the server pattern in `lib/agent/client.ts`
-  (`skills/<x.y.z>/<skill-folder>`, folder names up to 32 lowercase characters).
+- The `X-TubeTranscript-Client` value must keep the form the API accepts: `skills/<x.y.z>/<skill-folder>`, with folder
+  names of up to 32 lowercase letters, digits or hyphens. Other values are ignored by the API.
 - The key format check (`tt_live_` + 32 characters) mirrors the API, as in the Python SDK.

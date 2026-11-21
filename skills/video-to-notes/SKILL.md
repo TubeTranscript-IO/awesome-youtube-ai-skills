@@ -43,4 +43,5 @@ Save longer outputs next to the transcript (for example `transcripts/<video_id>.
 - Exact quotes may start mid-line: copy the words as they are, and link the time of the line they start on.
 - If the transcript does not cover what the user asks about, say so. Do not fill the gap from general knowledge
   without labelling it.
-- Files without timestamps (TikTok, Instagram, Facebook) cannot be cited by time: cite a short quote instead.
+- Files without timestamps (TikTok, Instagram, Facebook, or saved from the free MCP connection) cannot be cited by
+  time: cite a short quote instead.

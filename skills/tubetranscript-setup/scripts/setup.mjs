@@ -10,7 +10,7 @@ import { homedir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const VERSION = '0.1.0';
+const VERSION = '0.2.0';
 const SKILL = 'tubetranscript-setup';
 const BASE_URL = (process.env.TUBETRANSCRIPT_BASE_URL || 'https://tubetranscript.io').replace(/\/+$/, '');
 const UTM = `utm_source=agent-skills&utm_medium=${SKILL}`;
@@ -63,7 +63,7 @@ export async function verifyKey(key) {
   if (response.ok) return { valid: true };
   let body = {};
   try { body = await response.json(); } catch { /* not JSON */ }
-  if (response.status === 402 && body.reason === 'PLAN_UPGRADE_REQUIRED') return { valid: false, exit: 3, code: body.reason, message: 'The key is valid but its team is not on a plan with API access.', upgrade_url: `https://tubetranscript.io/pricing?${UTM}` };
+  if (response.status === 402 && body.reason === 'PLAN_UPGRADE_REQUIRED') return { valid: false, exit: 3, code: body.reason, message: 'The key is valid but its team is not on a plan with API access. API keys are part of Pro; the free plan connects through the TubeTranscript MCP server with a sign-in (see the tubetranscript-setup skill).', upgrade_url: `https://tubetranscript.io/pricing?${UTM}` };
   if (response.status === 402) return { valid: false, exit: 2, code: body.reason || 'INVALID_API_KEY', message: 'The API key is invalid or revoked. Create a new one in the dashboard.' };
   return { valid: false, exit: 1, code: `HTTP_${response.status}`, message: `TubeTranscript is unavailable (HTTP ${response.status}). Try again later.` };
 }

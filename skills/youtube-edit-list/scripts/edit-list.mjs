@@ -9,7 +9,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const VERSION = '0.1.0';
+const VERSION = '0.2.0';
 // Hesitation sounds only. Words like "like" or "so" are too often real words to cut automatically.
 const DEFAULT_FILLERS = ['um', 'umm', 'uh', 'uhh', 'uhm', 'erm', 'er', 'ah', 'hmm', 'mm', 'ờ', 'ừ', 'ừm', 'ừa', 'ơ', 'à', 'ầy', 'ehm', 'äh', 'ähm', 'euh', 'eh'];
 

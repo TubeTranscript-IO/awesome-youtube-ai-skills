@@ -14,6 +14,11 @@ silently ignores the whole list, so check every list with the script before givi
 If there is no saved transcript for this video yet, run the `youtube-transcript` skill's script with
 `--via youtube-chapters`. Add `--format json` as a second run if you want an exact video length for the check.
 
+This needs a timed transcript, which comes from the script with an API key (Pro). If the user only has the
+free MCP connection (the saved file says `Timestamps: none`), say that times need an API key (see
+`tubetranscript-setup`). Without times, offer a list of the sections in order, with no timestamps, for the user to time
+while watching.
+
 ## 2. Find the sections
 
 Read the file in parts of about 300 lines. A chapter starts where the topic changes: "next", "step two", "now let's

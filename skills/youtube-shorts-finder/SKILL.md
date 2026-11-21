@@ -13,6 +13,11 @@ transcript's timestamps let you find those spans precisely, so an editor can cut
 If there is no saved transcript for this video yet, run the `youtube-transcript` skill's script with
 `--via youtube-shorts-finder`. It saves `transcripts/<video_id>.<lang>.md` with one `[mm:ss] text` line per segment.
 
+This needs a timed transcript, which comes from the script with an API key (Pro). If the user only has the
+free MCP connection (the saved file says `Timestamps: none`), say that times need an API key (see
+`tubetranscript-setup`). Without times, list the moments by their opening and closing words so the editor can search for
+them.
+
 ## 2. Read for moments
 
 Read the file in parts of about 300 lines and note candidate spans as you go. Look for:

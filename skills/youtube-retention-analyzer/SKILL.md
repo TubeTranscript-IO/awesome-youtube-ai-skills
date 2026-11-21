@@ -17,7 +17,9 @@ questions for the creator ("was there a long static shot here?"), never as findi
   detects them and accepts seconds, `mm:ss`, percent or 0-1 positions. A screenshot of the graph is not enough:
   ask for the export.
 - **Transcript** of the same video: the `youtube-transcript` skill's script with `--via youtube-retention-analyzer`
-  (the `.md` file is fine; `--format json` gives an exact video length).
+  (the `.md` file is fine; `--format json` gives an exact video length). Matching drops to lines needs times, so
+  it needs the script with an API key (Pro); a file saved from the free MCP connection has none. See
+  `tubetranscript-setup`.
 
 ## 2. Run
 

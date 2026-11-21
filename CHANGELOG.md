@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.0 (unreleased)
+
+- Free path: `tubetranscript-setup` starts with connecting the TubeTranscript MCP server with a sign-in (OAuth) in
+  Claude Code, Cursor, VS Code and Claude; free accounts with a verified email get 15 transcripts per 24 hours, 3 of
+  them from audio. It explains the `EMAIL_VERIFICATION_REQUIRED`, `PLAN_UPGRADE_REQUIRED` and `RATE_LIMIT_EXCEEDED`
+  answers. The API key (Pro) stays the path for timestamps, SRT/VTT and the creator scripts.
+- `youtube-transcript`: tries the script, falls back to the MCP tools (`get_transcript`, `transcribe_url`) when no key
+  is set, joins long transcripts from their 60,000-character parts and saves them to `transcripts/<id>.md`.
+- Timed skills (`youtube-chapters`, `youtube-shorts-finder`, `youtube-edit-list`, `youtube-retention-analyzer`,
+  `youtube-to-srt`) say what to do with a transcript without times. Plan refusals in the scripts point to the free
+  connection.
+
 ## 0.1.0 (unreleased)
 
 - Published as `TubeTranscript-IO/awesome-youtube-ai-skills`; README rewritten as the directory of all skills and the two MCP

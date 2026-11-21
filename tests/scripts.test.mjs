@@ -61,7 +61,7 @@ test('saves a timestamped Markdown file and prints a short JSON summary, never t
   assert.match(file, /\[00:00\] All right, so here we are\n\[1:02:05\] the end\n$/);
   const [request] = requests;
   assert.equal(request.query.get('chunks'), '1'); assert.equal(request.query.get('video_url'), `https://www.youtube.com/watch?v=${ID}`);
-  assert.equal(request.headers['x-tubetranscript-client'], 'skills/0.1.0/youtube-transcript');
+  assert.equal(request.headers['x-tubetranscript-client'], 'skills/0.2.0/youtube-transcript');
 });
 
 test('reads the key from the credentials file when the env var is unset', async () => {
@@ -196,7 +196,7 @@ test('--format srt writes numbered cues that never overlap', async () => {
     '1\n00:00:00,000 --> 00:00:03,500\nAll right, so\n\n' +
     '2\n00:00:03,500 --> 00:00:05,500\nhere we are\n\n' +
     '3\n01:02:05,250 --> 01:02:08,250\nthe end\n');
-  assert.equal(requests[0].headers['x-tubetranscript-client'], 'skills/0.1.0/youtube-to-srt');
+  assert.equal(requests[0].headers['x-tubetranscript-client'], 'skills/0.2.0/youtube-to-srt');
 });
 
 test('--format vtt writes a WEBVTT file with dot milliseconds', async () => {
@@ -205,7 +205,7 @@ test('--format vtt writes a WEBVTT file with dot milliseconds', async () => {
   assert.equal(code, 0);
   const file = readFileSync(json.path, 'utf8');
   assert.match(file, /^WEBVTT\n\n00:00:00\.000 --> 00:00:03\.500\nAll right, so\n\n/);
-  assert.equal(requests[0].headers['x-tubetranscript-client'], 'skills/0.1.0/youtube-transcript');
+  assert.equal(requests[0].headers['x-tubetranscript-client'], 'skills/0.2.0/youtube-transcript');
 });
 
 test('subtitle formats need timestamps: a TikTok link with --format srt is exit 4, no file', async () => {

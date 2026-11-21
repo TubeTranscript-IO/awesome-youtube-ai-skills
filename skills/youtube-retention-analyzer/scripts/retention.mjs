@@ -8,7 +8,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const VERSION = '0.1.0';
+const VERSION = '0.2.0';
 const INTRO_SECONDS = 30;
 
 class Stop extends Error { constructor(code, message) { super(message); this.code = code; } }

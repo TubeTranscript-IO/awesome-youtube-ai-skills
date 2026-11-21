@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: email-verification-refusal
+expected_outcome: |
+  Explains that the account email is not verified, tells the user to open the verify_url (Security settings sends a link), open the link in the same browser and try again, without making Pro the fix and without asking for the password or the link in chat.

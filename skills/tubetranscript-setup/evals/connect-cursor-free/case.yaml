@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: connect-cursor-free
+expected_outcome: |
+  Steps to connect TubeTranscript to Cursor without paying: an mcp.json entry with only the URL https://tubetranscript.io/api/mcp (no API key or Authorization header), a browser sign-in with a free account and a verified email, and no request to paste a key, password or link into the chat.

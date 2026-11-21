@@ -19,6 +19,8 @@ Use both when you can.
   answers `FFMPEG_MISSING`, give the user the install command from its message.
 - **The video is on YouTube** (unlisted is fine): fetch its timed transcript with the `youtube-transcript` skill's
   script, `--format json --via youtube-edit-list`. Uploads get captions or audio transcription; either works.
+  The script needs an API key (Pro); the free MCP connection gives text without times, which is not enough for
+  cut points. Without a key, use `--media` on the footage instead.
 
 YouTube's captions often drop "um" and "uh". If the transcript has few fillers, say so rather than implying the
 recording is clean.

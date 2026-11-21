@@ -12,7 +12,7 @@ import { homedir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const VERSION = '0.1.0';
+const VERSION = '0.2.0';
 const SKILL = 'youtube-transcript';
 const BASE_URL = (process.env.TUBETRANSCRIPT_BASE_URL || 'https://tubetranscript.io').replace(/\/+$/, '');
 const UTM = `utm_source=agent-skills&utm_medium=${SKILL}`;
@@ -107,7 +107,7 @@ function failure(status, body, retryAfter) {
       return new Stop(EXIT.auth, reason, 'The TubeTranscript API key is missing, invalid or revoked. Run the tubetranscript-setup skill.', { setup_url: `https://tubetranscript.io/dashboard/api?${UTM}` });
     }
     if (reason === 'PLAN_UPGRADE_REQUIRED') {
-      return new Stop(EXIT.quota, reason, 'This API needs a Pro plan for this key.', { upgrade_url: pricing });
+      return new Stop(EXIT.quota, reason, 'API keys need the Pro plan. Without Pro, connect the TubeTranscript MCP server with a free sign-in (see the tubetranscript-setup skill).', { upgrade_url: pricing });
     }
     const wait = retryAfter ? ` Try again in about ${Math.ceil(Number(retryAfter) / 60)} minutes,` : '';
     return new Stop(EXIT.quota, reason || 'RATE_LIMIT_EXCEEDED', `The daily transcript allowance is used up.${wait} or upgrade for more.`, { upgrade_url: pricing, retry_after_seconds: retryAfter ? Number(retryAfter) : undefined });
